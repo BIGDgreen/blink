@@ -1,0 +1,20 @@
+/* components/like/index.wxss */
+.container {
+  padding: 10rpx;
+  display: inline-flex; /*宽度自适应*/
+  flex-direction: row;
+}
+
+.like-image {
+  width: 32rpx;
+  height: 28rpx;
+}
+
+.like-num {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #b2b2b2;
+  position: relative;
+  bottom: 10rpx;
+  left: 6rpx;
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bm-book": "/components/book/index",
+    "bm-search": "/components/search/index"
+  }
+}

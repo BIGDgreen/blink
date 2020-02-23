@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bm-button": "/components/image-button/index",
+    "bm-preview": "/components/preview/index"
+  }
+}

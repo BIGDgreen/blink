@@ -1,0 +1,34 @@
+<!--pages/classic/classic.wxml-->
+<view class="container">
+  <view class="header">
+    <bm-episode class="episode"
+                index = "{{currentData.index}}"/>
+    <view class="like-container">
+      <bm-like class="like"
+          bind:like = "onLike"
+          like = "{{likeStatus}}"
+          likeNum = "{{likeNum}}"/>
+      <bm-button open-type="share" class="share-btn">
+        <image slot="img" src="/images/icon/share.png" class="share"/>
+      </bm-button>  
+    </view>
+  </view>
+  <bm-movie hidden = "{{currentData.type == 200 || currentData.type == 300}}"
+            imgSrc = "{{currentData.image}}"
+            content = "{{currentData.content}}"/>
+  <bm-music wx:if = "{{currentData.type == 200}}" 
+            imgSrc = "{{currentData.image}}"
+            content = "{{currentData.content}}"
+            src = "{{currentData.url}}"
+            title = "{{currentData.title}}"/>
+  <bm-essay hidden = "{{currentData.type == 100 || currentData.type == 200}}"
+            imgSrc = "{{currentData.image}}"
+            content = "{{currentData.content}}"/>
+  <bm-navi wx:if="{{!specific}}"
+           class="navi"
+           bind:left="onNext" 
+           bind:right="onPrevious"
+           title = "{{currentData.title}}"
+           first = "{{first}}"
+           last = "{{last}}"/>
+</view>

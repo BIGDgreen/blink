@@ -1,0 +1,2 @@
+<!--pages/classic-detail/classic-detail.wxml-->
+<bm-classic cid="{{cid}}" type="{{type}}"></bm-classic>

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "bm-classic":"/pages/classic/classic"
+  }
+}

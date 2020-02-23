@@ -1,0 +1,47 @@
+/**
+ * 格式化字符串（使用换行和添加首行缩进）
+ * @param { String } text 
+ */
+var format = function(text) {
+  // console.log(text);     // 页面初始化和更新都会执行该函数
+  if(!text) return;
+  var regexp = getRegExp('\\\\n', 'g');
+  return text.replace(regexp, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+}
+
+/**
+ * 设置第一个tag和第二个tag的背景色
+ * @param {number} index 
+ */
+var exchangeStyle = function(index) {
+  return index == 0 ? 'ex-tag1' : index == 1 ? 'ex-tag2' : '';
+}
+
+/**
+ * 限制数组的长度
+ * @param {Array} array 
+ * @param {number} length 
+ */
+var arrayLimit = function(array, length) {
+  return array.slice(0, length);
+}
+
+/**
+ * 将数字类型转化为文字字符串
+ * @param {string} type 
+ */
+var typeToString = function(type){
+  switch (type) {
+    case 100: return "电影"
+    case 200: return "音乐"
+    case 300: return "句子"
+    default: return ""
+  }
+}
+
+module.exports = {
+    format: format,
+    exchangeStyle: exchangeStyle,
+    arrayLimit: arrayLimit,
+    typeToString: typeToString
+}

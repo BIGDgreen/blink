@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "bm-like": "/components/like/index",
+    "bm-movie": "/components/classic/movie/index",
+    "bm-music": "/components/classic/music/index",
+    "bm-essay": "/components/classic/essay/index",
+    "bm-episode": "/components/episode/index",
+    "bm-navi": "/components/navi/index",
+    "bm-button": "/components/image-button/index"
+  }
+}

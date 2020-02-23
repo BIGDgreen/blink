@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "bm-tag": "/components/tag/index",
+    "bm-book": "/components/book/index",
+    "bm-loading": "/components/loading/index"
+  }
+}
