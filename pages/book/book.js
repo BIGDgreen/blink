@@ -17,7 +17,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad() {
-    const bookList = await bookModel.getHotList();
+    const bookList = await bookModel.getHotList().catch(err=>{console.error(err)});
+    console.log("bookList:::", bookList);
     this.setData({
       bookList
     })

@@ -82,21 +82,22 @@ Page({
    *获取我喜欢的书籍数量
    *
    */
-  _getLikeBookCount() {
-    bookModel.getLikeCount()
-    .then(res => {
-      this.setData({
-        bookCount: res.count
-      })
+  async _getLikeBookCount() {
+    const res = await bookModel.getLikeCount().catch(err=>console.error(err));
+    this.setData({
+      bookCount: res.count
     })
   },
 
-  _getFavorEpisode() {
-    classicModel.getFavor((res) => {
-      console.log("favorEpisode:::", res);
-      this.setData({
-        favorClassic: res
-      })
-    })
+  /**
+   *获取我喜欢的期刊
+   *
+   */
+  async _getFavorEpisode() {
+    const res = await classicModel.getFavor().catch(err=>console.error(err));
+    console.log("favorEpisode:::", res);
+    this.setData({
+      favorClassic: res
+    });
   }
 })

@@ -1,4 +1,4 @@
-import { HTTP } from '../utils/http.js'
+import { HTTP } from '../utils/http-p.js'
 
 class LikeModel extends HTTP {
   /**
@@ -8,7 +8,7 @@ class LikeModel extends HTTP {
    * @param {number} category 
    */
   like(behavior, artID, category) {
-    let likeUrl = behavior == 'like' ? 'like' : 'like/cancel'
+    const likeUrl = behavior == 'like' ? 'like' : 'like/cancel';
     this.request({
       url: likeUrl,
       method: 'POST',
@@ -25,14 +25,8 @@ class LikeModel extends HTTP {
    * @param {string} category 
    * @param {function} sCallBack 
    */
-   getClassicLikeStatus(artID, category, sCallBack){
-     this.request({
-       url: `classic/${category}/${artID}/favor`,
-       success: (res) => {
-         console.log("likeStatus:::",res);
-         sCallBack(res);
-       }
-     })
+  getClassicLikeStatus(artID, category){
+    return this.request({url:`classic/${category}/${artID}/favor`});
    }
 }
 

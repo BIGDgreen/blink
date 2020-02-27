@@ -20,31 +20,35 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  async onLoad(options) {
     wx.showLoading({
       title: '加载中，请稍候',
       mask: true,
     });
     const bookId = options.bookId;
     // console.log("params:::", options.bookId);
-    const bookDetail = bookModel.getDetail(bookId);
-    const likeStatus = bookModel.getLikeStatus(bookId);
-    const comments = bookModel.getComments(bookId);
+    const bookDetail = await bookModel.getDetail(bookId).catch(err => {this._showError(err)});
+    const likeStatus = await bookModel.getLikeStatus(bookId).catch(err => {this._showError(err)});
+    const comments = await bookModel.getComments(bookId).catch(err => {this._showError(err)});
 
-    Promise.all([bookDetail, likeStatus, comments])
-      .then(res => {
-        console.log("bookData:::", res);
-        wx.hideLoading();
+    // Promise.all([bookDetail, likeStatus, comments])
+      // .then(res => {
+        // console.log("bookData:::", res);
+        if(bookDetail) {
+          wx.hideLoading();
+        }
         this.setData({
-          book: res[0],
-          likeNum: res[1].fav_nums,
-          likeStatus: res[1].like_status,
-          comments: res[2].comments
+          book: bookDetail,
+          likeNum: likeStatus.fav_nums,
+          likeStatus: likeStatus.like_status,
+          comments: comments.comments
         })
-      })
-      .catch(err => {
-        wx.hideLoading();
-      }) 
+      // })
+  },
+
+  _showError(error) {
+    wx.hideLoading();
+    console.error(error);
   },
 
   /**
@@ -79,7 +83,7 @@ Page({
    * 评论点击标签+1
    * @param {*} event 
    */
-  onPost(event) {
+  async onPost(event) {
     console.log("CommentTap:::", event);
     const comment = event.detail.tagContent || event.detail.value;
 
@@ -93,9 +97,9 @@ Page({
       return
     }
 
-    bookModel.postComments(1049, comment)
-      .then(res => {
-        console.log("postComment:::", res);
+    const res = await bookModel.postComments(1049, comment);
+    console.log("postComment:::", res);
+    if(res.msg == 'ok') {
         wx.showToast({
           title: '操作成功'
         })
@@ -107,6 +111,6 @@ Page({
           comments: this.data.comments,
           // posting: false
         })
-      })
-  }
+      }
+    }
 })

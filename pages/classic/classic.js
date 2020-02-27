@@ -65,35 +65,31 @@ Component({
       this._updateClassic('previous');
     },
 
-      /**
-     *获取最新一期的期刊
-    *
+    /**
+    *获取最新一期的期刊
     */
-    _getLatest() {
-      classicModel.getLatest((res) => {
-        console.log("latestData:::",res);
-        this.setData({
-          currentData: res,
-          likeStatus: res.like_status,
-          likeNum: res.fav_nums
-        })
-      });
+    async _getLatest() {
+      let res = await classicModel.getLatest();
+      console.log("latestData:::",res);
+      this.setData({
+        currentData: res,
+        likeStatus: res.like_status,
+        likeNum: res.fav_nums
+      })
     },
 
-    _getIdClassic(category, id) {
+    async _getIdClassic(category, id) {
       // console.log(category, id);
-      classicModel.getClassicDetail(category, id, 
-        (res) => {
-          // console.log("classicDetail:::", res);
-          this.setData({
-            currentData: res
-          })
-        })
+      const res = await classicModel.getClassicDetail(category, id); 
+      console.log("classicDetail:::", res);
+      this.setData({
+        currentData: res
+      })
     },
     
-    _updateClassic(nextOrPrevious) {
+    async _updateClassic(nextOrPrevious) {
       const index = this.data.currentData.index;
-      classicModel.getClassic(index, nextOrPrevious, (res) => {
+      let res = await classicModel.getClassic(index, nextOrPrevious);
       console.log("currentData:::",res);
       this._getLikeStatus(res.id, res.type);
       this.setData({
@@ -102,7 +98,6 @@ Component({
           last: classicModel.isLatest(res.index)
         })
       // console.log("first:::",this.data.first,"last:::",this.data.last)
-      })
     },
 
     /**
@@ -111,13 +106,13 @@ Component({
     * @param {number} artID
     * @param {string} category
     */
-    _getLikeStatus(artID, category) {
-      likeModel.getClassicLikeStatus(artID, category, (res) => {
-        this.setData({
-          likeStatus: res.like_status,
-          likeNum: res.fav_nums
-        })
-      })
-    },
+    async _getLikeStatus(artID, category) {
+      const res = await likeModel.getClassicLikeStatus(artID, category);
+      console.log("likeStatus:::", res);
+      this.setData({
+        likeStatus: res.like_status,
+        likeNum: res.fav_nums
+      });
+    }
   }
 })
